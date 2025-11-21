@@ -1,0 +1,8 @@
+/logs/
+.idea/
+/build/
+/log/
+/data/
+/temp/
+/sync.sh
+/config.json
