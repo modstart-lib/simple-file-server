@@ -24,6 +24,17 @@ make
 
 构建完成后，二进制文件将在 `build/` 目录中生成。
 
+### 使用 Docker 构建
+
+确保你已经安装了 Docker。
+
+```bash
+docker build -t simple-file-server .
+docker run -p 60088:60088 --rm \
+      -v $(pwd)/data-docker:/data:rw \
+      -v $(pwd)/config.json:/config.json simple-file-server
+```
+
 ### 下载预编译二进制文件
 
 从 release 页面下载适合你平台的二进制文件。
@@ -50,8 +61,16 @@ make
 
 ## 运行
 
+### 使用二进制文件
+
 ```bash
 ./simple-file-server
+```
+
+### 使用 Docker
+
+```bash
+docker run -p 60088:60088 -v $(pwd)/data:/root/data -v $(pwd)/temp:/root/temp simple-file-server
 ```
 
 服务器将在配置的端口上启动，并开始监听请求。

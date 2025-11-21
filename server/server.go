@@ -246,6 +246,31 @@ func ActionServeFile(c *gin.Context) {
 		c.AbortWithStatus(404)
 		return
 	}
+	mediaTypes := map[string]string{
+		".jpg":  "image/jpeg",
+		".jpeg": "image/jpeg",
+		".png":  "image/png",
+		".gif":  "image/gif",
+		".mp4":  "video/mp4",
+		".avi":  "video/x-msvideo",
+		".mp3":  "audio/mpeg",
+		".wav":  "audio/wav",
+		".webm": "video/webm",
+		".ogg":  "audio/ogg",
+		".pdf":  "application/pdf",
+		".txt":  "text/plain",
+		".html": "text/html",
+		".css":  "text/css",
+		".js":   "application/javascript",
+		".json": "application/json",
+		".xml":  "application/xml",
+		".zip":  "application/zip",
+	}
+	ext := strings.ToLower(filepath.Ext(fullPath))
+	if mt, ok := mediaTypes[ext]; ok {
+		c.Header("Content-Type", mt)
+	}
+	c.Header("Server", "Simple-File-Server")
 	c.File(fullPath)
 }
 
